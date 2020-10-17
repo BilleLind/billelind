@@ -38,6 +38,7 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         password: ${{ secrets.PASSWORD }} 
         key: ${{ secrets.SSH_KEY }}
+        passphrase: ${{ secrets.PASSWORD }}
         port: ${{ secrets.SSH_PORT }}
         script: |
           cd ~/billelind
