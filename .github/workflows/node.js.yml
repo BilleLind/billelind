@@ -7,6 +7,9 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches: 
+      - master
 
 jobs:
   test:
@@ -25,23 +28,3 @@ jobs:
         npm test
       env:
         CI: true
-
-  deploy:
-    needs: [test]
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: SSH and deploy node app
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USERNAME }}
-        password: ${{ secrets.PASSWORD }} 
-        key: ${{ secrets.SSH_KEY }}
-        passphrase: ${{ secrets.PASSWORD }}
-        port: ${{ secrets.SSH_PORT }}
-        script: |
-          cd ~/billelind
-          git pull origin master
-          npm install --production
-          pm2 restart node-app
