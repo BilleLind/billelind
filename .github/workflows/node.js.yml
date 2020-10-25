@@ -33,4 +33,4 @@ jobs:
           with:
             name: yokarak/billelind
             username: ${{ secrets.DOCKER_USERNAME }}
-            password: ${{ secrets. DOCKER_PASSWORD }}
+            password: ${{ secrets.DOCKER_PASSWORD }}
