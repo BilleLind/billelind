@@ -3,10 +3,7 @@
 
 name: Node Github CI
 
-on:
-  push:
-    branches:
-      - master
+on: [push, pull_request]
 
 jobs:
   test:
@@ -14,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@master
     - name: Use Node.js node-version [12.x]
       uses: actions/setup-node@v1
       with:
@@ -25,22 +22,16 @@ jobs:
         npm test
       env:
         CI: true
+  build:
+    needs: test
 
-  deploy:
-    needs: [test]
     runs-on: ubuntu-latest
 
     steps:
-    - name: SSH and deploy node app
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USERNAME }}
-        password: ${{ secrets.PASSWORD }} 
-        key: ${{ secrets.SSH_KEY }}
-        port: ${{ secrets.SSH_PORT }}
-        script: |
-          cd ~/billelind
-          git pull origin master
-          npm install --production
-          pm2 restart node-app
+        - uses: actions/checkout@master
+        - name: Publish to Docker Repo
+          uses: elgohr/Publish-Docker-Github-Action@master
+          with:
+            name: yokarak/billelind
+            username: ${{ secrets.DOCKER_USERNAME }}
+            password: ${{ secrets. DOCKER_PASSWORD }}
