@@ -7,14 +7,16 @@ var port = process.env.PORT || '8000'
 
 var homeRouter = require('./routes/home');
 var testerRouter = require('./routes/test');
+var batRouter = require('./routes/bat');
 
-app.engine('handlebars', exhbs());
-app.set('view engine', 'handlebars');
+app.engine('.hbs', exhbs({defaultLayout: 'main', extname: '.hbs'}));
+app.set('view engine', '.hbs');
 
-app.use(express.static(path.join(__dirname, 'styles'))) 
+app.use(express.static(path.join(__dirname, 'static'))) 
 
 app.use('/', homeRouter);
 app.use('/test', testerRouter);
+app.use('/bat', batRouter);
 
 
 
