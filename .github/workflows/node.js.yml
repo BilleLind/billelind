@@ -34,7 +34,7 @@ jobs:
       with:
         image: yokarak/billelind
         registry: docker.io
-        tags: v1, latest
+        tags: latest
         dockerfile: ./dockerfile
         directory: ./server
         username: ${{ secrets.DOCKER_USERNAME }}
