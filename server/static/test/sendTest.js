@@ -22,7 +22,7 @@ describe('Tester render', () =>{
         chai.request(app)
         .get('/test/render').end((err, res)=>{
             expect(res).to.have.status(200 || 304);
-           // expect(res).to.equals('<h1>Render Test</h1>');
+            expect(res.text).to.equals('<h1>Render Test</h1>');
             done();
         })
     })
