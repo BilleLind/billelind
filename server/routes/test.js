@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/render', (req, res) =>{
-  res.render(test, {layout: false})
+  res.render('test', {layout: false})
 })
 
 
