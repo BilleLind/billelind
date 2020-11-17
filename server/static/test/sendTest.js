@@ -1,27 +1,29 @@
-const test = require('supertest');
-const { request } = require('../../server');
 const app = require('../../server');
-const exprext = require('chai').assert;
+const chai = require('chai');
+const chaihttp = require('chai-http');
 
-describe("Get /", ()=> {
-    it('respond with Tester tester', (done) => {
-        test(app).get('/test').expect('Tester tester via github actions', done);
+const{ expect } = chai;
+chai.use(chaihttp);
+
+describe("Tester!", () =>{
+    it('test example json', done =>{
+        chai.request(app)
+        .get('/test').end((err, res)=>{
+            expect(res).to.have.status(200);
+            expect(res.body.status).to.equals('Tester succes')
+            expect(res.body.message).to.equals('Welcome to testing route!');
+            done();
+        })
     })
 });
 
-
-describe('render test', function(done) {
-    it('should return with 200 (ok)', function() {
-        
-        test(app).get('/test/render').expect(200 ).end((err, res)=> {
+describe('Tester render', () =>{
+    it('render of test.hbs', done =>{
+        chai.request(app)
+        .get('test/render').end((err, res)=>{
+            expect(res).to.have.status(200 || 304);
+            expect(res.body).to.equals('<h1>Render Test</h1>');
+            done();
         })
-    })
-})
-
-describe('render test', function(done) {
-    it('should return the rendered test with main layout', function() {    
-        test(app).get(('/test/render'), function(req, res) {
-            assert()
-        })  
     })
 })

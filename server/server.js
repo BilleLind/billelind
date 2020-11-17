@@ -2,6 +2,9 @@ const express = require('express');
 const app = express();
 const exhbs = require('express-handlebars');
 var path = require('path');
+var  logger = require('morgan');
+app.use(express.json());
+
 
 var port = process.env.PORT || '8000'
 
@@ -14,9 +17,16 @@ var batRouter = require('./routes/bat');
 app.engine('.hbs', exhbs({defaultLayout: 'main', extname: '.hbs'}));
 app.set('view engine', '.hbs');
 
+//Enabling logger in dev
+app.use(logger('dev'));
+
 //Creating a static folder for css, js and test
 app.use(express.static(path.join(__dirname, 'static'))) 
 
+app.use(function(req, res, next) {
+    res.locals.showTests = req.query.test === 'show';
+    next();
+})
 
 //connection the router to the path
 app.use('/', homeRouter);
