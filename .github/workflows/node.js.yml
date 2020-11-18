@@ -40,12 +40,5 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
     
-    - name: login to digitalocean and run from dockerhub
-      uses: appleboy/ssh-action@master
-      with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          port: ${{ secrets.PORT }}
-          script: ls -al 
+   
 
