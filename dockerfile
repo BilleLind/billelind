@@ -10,6 +10,4 @@ COPY server ./
 
 EXPOSE 3000
 
-RUN ls -l 
-
 CMD ["npm", "start"]
