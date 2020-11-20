@@ -23,7 +23,7 @@ app.use(logger('dev'));
 //Creating a static folder for css, js and test
 app.use(express.static(path.join(__dirname, 'static'))) 
 
-app.use(function(req, res, next) {
+app.use(function(req, res, next) { // do i need this? from a weird test guide thingy
     res.locals.showTests = req.query.test === 'show';
     next();
 })
