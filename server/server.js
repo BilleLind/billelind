@@ -12,6 +12,7 @@ var port = process.env.PORT || '8080'
 var homeRouter = require('./routes/home');
 var testerRouter = require('./routes/test');
 var batRouter = require('./routes/bat');
+var createRouter = require('./routes/create')
 
 //setting up the templating engine
 app.engine('.hbs', exhbs({defaultLayout: 'main', extname: '.hbs'}));
@@ -32,6 +33,7 @@ app.use(function(req, res, next) { // do i need this? from a weird test guide th
 app.use('/', homeRouter);
 app.use('/test', testerRouter);
 app.use('/bat', batRouter);
+app.use('/create', createRouter)
 
 
 

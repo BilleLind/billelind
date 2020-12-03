@@ -1,2 +1,25 @@
+<div class="row">
+    <div class="col-4">
+        {{#each story}}
+        <div class="card mb-3" style="background-color: #9DCBD1;">
+            <div class="card-body p-4 ">
+                
+                <h4 class="card-title"> {{title}}</h4> 
+                <div class="card-subtitle text-muted"> {{subtitle}}</div>
+                <hr class="mt-1 mb-1">
+                <p>{{description}}</p>
+            </div>
+        </div>
+        {{/each}}
+    </div>
 
-<h1> welcome to the home page</h1>
+    <div class="col-8 column">
+        <div class="card border-primary" >
+            <div class="card-body p-4">
+                {{#each articles}}
+                <h5 class="text-center">{{title}}</h5>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>
