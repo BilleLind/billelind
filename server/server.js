@@ -6,7 +6,7 @@ var  logger = require('morgan');
 app.use(express.json());
 
 
-var port = process.env.PORT || '8000'
+var port = process.env.PORT || '8080'
 
 //router file location
 var homeRouter = require('./routes/home');
