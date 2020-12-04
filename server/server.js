@@ -13,7 +13,7 @@ var port = process.env.PORT || '8080'
 var homeRouter = require('./routes/home');
 var testerRouter = require('./routes/test');
 var batRouter = require('./routes/bat');
-var createRouter = require('./routes/create')
+var articleRouter = require('./routes/article')
 
 //setting up the templating engine
 app.engine('.hbs', exhbs({defaultLayout: 'main', extname: '.hbs'}));
@@ -28,6 +28,8 @@ db.on('error', console.error.bind(console, 'connection error'));
 db.once('open', function(){
     console.log('Database: Connection succesful')
 }) 
+
+app.use(express.urlencoded({extended:false}))
 
 //Enabling logger in dev
 app.use(logger('dev'));
@@ -44,7 +46,7 @@ app.use(function(req, res, next) { // do i need this? from a weird test guide th
 app.use('/', homeRouter);
 app.use('/test', testerRouter);
 app.use('/bat', batRouter);
-app.use('/create', createRouter)
+app.use('/article', articleRouter)
 
 
 
