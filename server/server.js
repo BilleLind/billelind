@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const exhbs = require('express-handlebars');
+const mongoose = require('mongoose')
 var path = require('path');
 var  logger = require('morgan');
 app.use(express.json());
@@ -17,6 +18,16 @@ var createRouter = require('./routes/create')
 //setting up the templating engine
 app.engine('.hbs', exhbs({defaultLayout: 'main', extname: '.hbs'}));
 app.set('view engine', '.hbs');
+
+//setting up the mongoDB connection
+mongoose.connect('mongodb://localhost/blog', { useUnifiedTopology: true, useNewUrlParser:true });
+
+//db connection test 
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error'));
+db.once('open', function(){
+    console.log('Database: Connection succesful')
+}) 
 
 //Enabling logger in dev
 app.use(logger('dev'));
