@@ -9,15 +9,22 @@ router.get('/', (req,res) =>{
     res.send('hej')
 })
 
+//creating a new article
 router.get('/new', (req, res)=> {
     res.render('newArticle', {})
 })
 
+
+//editing a article
+router.get('/:slug')
+
 //show a specific article by the id
 router.get('/:id', (req,res)=>{
+
     res.render('article')
 })
 
+//for posting the article to the database
 router.post('/', async (req, res) => {
     const article = new Article( {
         title: req.body.title,
@@ -27,7 +34,7 @@ router.post('/', async (req, res) => {
     })
     try {
         await article.save()
-        res.redirect('home') //'/'+ article.id
+        res.redirect('/article/'+ article.id) 
     } catch (error) {
         res.render('newArticle', {article: article})
     }   
